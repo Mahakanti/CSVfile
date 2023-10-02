@@ -1,0 +1,68 @@
+<!-- local css for body -->
+<link rel="stylesheet" type="text/css" href="../css/home.css">
+<!-- local css for header -->
+<link rel="stylesheet" type="text/css" href="../css/header.css">
+
+
+<!-- header -->
+<div class="nav-bar">
+    <i class="fa-regular fa-file-image" ></i>
+        
+       
+    <div class="title">
+        CSV Upload
+    </div>
+</div>
+
+<!-- upload -->
+<div class="container">
+    <!-- main text -->
+    <div class="center-text">
+        <h1>Upload Your CSV File Here</h1>
+        <p>CSV file cconvert into tabular form</p>
+    </div>
+
+    <!-- upload box -->
+    <div class="input-container">
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        
+            <input type="file" id="csvFile" name="file" accept=".csv">
+            <button class="upload-btn">Upload</button>
+    
+    </form>
+</div>
+</div>
+
+<!-- show files -->
+<div class="files-list">  
+    <div class="list-center-text">
+        <h2>Uploaded Files</h2>
+    </div>
+
+    <% if(files.length==0) { %>
+        <div class="no-file">No files to show!</div>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>View</th>
+                <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let file of files) { %>
+                <tr>
+                    <td><%= file.fileName %></td>
+                    <td><%= file.createdAt.toLocaleDateString() %></td>
+                    <td><%= file.createdAt.toLocaleTimeString() %></td>
+                    <td><a href="/view/<%= file.file %>" class="view-link"><i class="fa-solid fa-eye"></i></a></td>
+                    <td><a href="/delete/<%= file.file %>" class="delete-link"><i class="fa-solid fa-trash fa-bounce"; ></i></a></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
