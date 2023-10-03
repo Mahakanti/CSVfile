@@ -1,1 +1,1 @@
-project description
+This is a full stack project
